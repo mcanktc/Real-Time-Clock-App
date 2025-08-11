@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
+    'RTCApp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,6 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'RTimeClock.wsgi.application'
+ASGI_APPLICATION = 'RTimeClock.asgi.application'
 
 
 # Database
