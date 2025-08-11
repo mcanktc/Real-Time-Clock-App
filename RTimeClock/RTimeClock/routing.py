@@ -1,7 +1,6 @@
-from django.urls import re_path
-from RTCApp.consumers import ClockConsumer
+from RTCApp.routing import websocket_urlpatterns
+from channels.routing import URLRouter
 
-websocket_urlpatterns = [
 
-    
-]
+URLRouter(websocket_urlpatterns)
+

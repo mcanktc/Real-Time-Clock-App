@@ -1,8 +1,17 @@
-from channels.generic.websocket import AsyncWebsocketConsumer
-import json
+from channels.generic.websocket import AsyncJsonWebsocketConsumer
+import asyncio
+from django.utils import timezone  
 
-class ClockConsumer(AsyncWebsocketConsumer):
+class ClockConsumer(AsyncJsonWebsocketConsumer):
     async def connect(self):
-        self.clock
-        return await self.accept()
-    
+        await self.accept()  
+        self.clock_task = asyncio.create_task(self.tick())
+
+    async def tick(self):
+        try:
+            while True:
+                now = timezone.now()
+                await self.send_json({"time": str(now)})  
+                await asyncio.sleep(1)
+        except asyncio.CancelledError:
+            pass
